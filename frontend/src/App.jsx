@@ -222,12 +222,12 @@ export default function App() {
           </div>
 
           <div className="chart-body">
-            {loading ? (
-              <div className="loading-box">Loading data...</div>
-            ) : chartData.length === 0 ? (
-              <div className="loading-box">No data for selected range.</div>
-            ) : (
-              <ResponsiveContainer width="100%" height="100%">
+          {loading ? (
+          <div className="loading-box">Loading data...</div>
+          ) : chartData.length === 0 ? (
+            <div className="loading-box">No data for selected range.</div>
+          ) : (
+          <ResponsiveContainer width="100%" height="100%" minHeight={250}>
                 <LineChart data={chartData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                   <XAxis
