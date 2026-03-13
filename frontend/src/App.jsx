@@ -1,8 +1,11 @@
 import { useState, useEffect, useRef } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid,Tooltip, ResponsiveContainer} from 'recharts'
+import {
+  LineChart, Line, XAxis, YAxis, CartesianGrid,
+  Tooltip, ResponsiveContainer
+} from 'recharts'
 import axios from 'axios'
 
-const API_BASE = 'https://reint-wind-forecast-backend.onrender.com/api'
+const API_BASE = 'http://localhost:5000/api'
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -58,7 +61,7 @@ export default function App() {
 
   const [metrics, setMetrics] = useState({
     avgError: null, maxError: null,
-    coverage: null, dataRange: 'Jan 01 – Jan 31, 2024'
+    coverage: null, dataRange: new Date(startTime).toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'}) + ' – ' + new Date(endTime).toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'})
   })
 
   const updateSliderBg = (val) => {
@@ -121,7 +124,7 @@ export default function App() {
       avgError:  avgErr.toFixed(0),
       maxError:  maxErr.toFixed(0),
       coverage:  coverage.toFixed(1),
-      dataRange: 'Jan 01 – Jan 31, 2024'
+      dataRange: new Date(startTime).toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'}) + ' – ' + new Date(endTime).toLocaleDateString('en-GB', {day:'2-digit',month:'short',year:'numeric'})
     })
   }
 
@@ -136,7 +139,7 @@ export default function App() {
       <nav className="navbar">
         <div className="navbar-brand">
           <div className="navbar-logo-wrap">
-            <img src="/reint-logo.png" alt="REint AI" style={{height:'36px', width:'auto', objectFit:'contain'}} />
+            <img src="/reint-logo.png.png" alt="REint AI" style={{height:'36px', width:'auto', objectFit:'contain'}} />
           </div>
           <div className="navbar-divider" />
           <span className="navbar-title">Forecast Monitoring</span>
@@ -222,12 +225,12 @@ export default function App() {
           </div>
 
           <div className="chart-body">
-          {loading ? (
-          <div className="loading-box">Loading data...</div>
-          ) : chartData.length === 0 ? (
-            <div className="loading-box">No data for selected range.</div>
-          ) : (
-          <ResponsiveContainer width="100%" height="100%" minHeight={250}>
+            {loading ? (
+              <div className="loading-box">Loading data...</div>
+            ) : chartData.length === 0 ? (
+              <div className="loading-box">No data for selected range.</div>
+            ) : (
+              <ResponsiveContainer width="100%" height="100%" minHeight={250}>
                 <LineChart data={chartData} margin={{ top: 5, right: 10, left: 0, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" stroke="#f0f0f0" />
                   <XAxis
