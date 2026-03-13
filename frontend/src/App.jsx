@@ -5,7 +5,7 @@ import {
 } from 'recharts'
 import axios from 'axios'
 
-const API_BASE = 'https://reint-wind-forecast-backend.onrender.com/api'
+const API_BASE = 'https://reint-wind-forecast-backend.onrender.com'
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
