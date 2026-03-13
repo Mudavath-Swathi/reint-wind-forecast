@@ -230,3 +230,25 @@ html, body {
   .navbar        { padding: 0 1rem; }
   .page-body     { padding: 1rem; }
 }
+
+/* MOBILE FIX — chart needs explicit height for Recharts to render */
+@media (max-width: 900px) {
+  html, body { overflow: auto; }
+  .page-body  { height: auto; }
+  .chart-card { min-height: 350px; }
+  .chart-body { height: 280px !important; min-height: 280px; }
+  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+  .chart-legend { flex-wrap: wrap; gap: 10px; }
+}
+
+@media (max-width: 600px) {
+  .controls-grid { flex-direction: column; }
+  .metrics-grid  { grid-template-columns: 1fr; }
+  .navbar        { padding: 0 1rem; }
+  .page-body     { padding: 1rem; }
+  .chart-card    { min-height: 320px; }
+  .chart-body    { height: 250px !important; min-height: 250px; }
+  .chart-header  { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .horizon-group { width: 100%; }
+  .primary-btn   { width: 100%; }
+}
