@@ -5,7 +5,7 @@ import {
 } from 'recharts'
 import axios from 'axios'
 
-const API_BASE = 'http://localhost:5000/api'
+const API_BASE = 'https://reint-wind-forecast-backend.onrender.com/api'
 
 const CustomTooltip = ({ active, payload, label }) => {
   if (active && payload && payload.length) {
@@ -139,7 +139,7 @@ export default function App() {
       <nav className="navbar">
         <div className="navbar-brand">
           <div className="navbar-logo-wrap">
-            <img src="/reint-logo.png.png" alt="REint AI" style={{height:'36px', width:'auto', objectFit:'contain'}} />
+            <img src="/reint-logo.png" alt="REint AI" style={{height:'36px', width:'auto', objectFit:'contain'}} />
           </div>
           <div className="navbar-divider" />
           <span className="navbar-title">Forecast Monitoring</span>
