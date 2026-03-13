@@ -47,7 +47,7 @@ html, body {
   border: 1.5px solid #e5e7eb; background-color: #ffffff;
   display: flex; align-items: center; justify-content: center;
   cursor: pointer; font-size: 16px; color: #6b7280;
-  transition: background 0.15s;
+  transition: background 0.15s; flex-shrink: 0;
 }
 .btn-icon:hover { background-color: #f9fafb; }
 
@@ -56,6 +56,7 @@ html, body {
   border-radius: 10px; padding: 9px 20px; font-size: 14px;
   font-weight: 600; cursor: pointer; display: flex;
   align-items: center; gap: 7px; transition: background 0.15s;
+  white-space: nowrap; flex-shrink: 0;
 }
 .btn-download:hover { background-color: #374151; }
 
@@ -168,8 +169,8 @@ html, body {
   display: flex; align-items: center; gap: 7px;
   font-size: 13px; color: #6b7280; font-weight: 500;
 }
-.legend-dot-blue  { width: 12px; height: 12px; border-radius: 50%; background-color: #2563eb; }
-.legend-dot-green { width: 12px; height: 12px; border-radius: 50%; background-color: #16a34a; }
+.legend-dot-blue  { width: 12px; height: 12px; border-radius: 50%; background-color: #2563eb; flex-shrink: 0; }
+.legend-dot-green { width: 12px; height: 12px; border-radius: 50%; background-color: #16a34a; flex-shrink: 0; }
 
 .chart-body { flex: 1; min-height: 0; }
 
@@ -190,17 +191,19 @@ html, body {
   border: 1px solid #e5e7eb; padding: 1rem 1.25rem;
   box-shadow: 0 1px 4px rgba(0,0,0,0.06);
   display: flex; flex-direction: column; gap: 6px;
+  min-width: 0; /* prevent overflow in grid */
 }
 .metric-header {
   display: flex; align-items: center; gap: 8px;
   font-size: 13px; color: #6b7280; font-weight: 500;
+  white-space: nowrap; overflow: hidden;
 }
-.metric-icon-blue  { color: #2563eb; font-size: 16px; }
-.metric-icon-red   { color: #ef4444; font-size: 16px; }
-.metric-icon-green { color: #16a34a; font-size: 16px; }
-.metric-icon-gray  { color: #6b7280; font-size: 16px; }
+.metric-icon-blue  { color: #2563eb; font-size: 16px; flex-shrink: 0; }
+.metric-icon-red   { color: #ef4444; font-size: 16px; flex-shrink: 0; }
+.metric-icon-green { color: #16a34a; font-size: 16px; flex-shrink: 0; }
+.metric-icon-gray  { color: #6b7280; font-size: 16px; flex-shrink: 0; }
 
-.metric-value        { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
+.metric-value        { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; white-space: nowrap; }
 .metric-value.orange { color: #f97316; }
 .metric-value.blue   { color: #2563eb; }
 .metric-value.green  { color: #16a34a; }
@@ -216,43 +219,91 @@ html, body {
 .tooltip-actual   { color: #2563eb; font-weight: 500; margin-bottom: 2px; }
 .tooltip-forecast { color: #16a34a; font-weight: 500; }
 
-/* ── RESPONSIVE ── */
+/* ════════════════════════════════
+   RESPONSIVE — TABLET (≤ 900px)
+   ════════════════════════════════ */
 @media (max-width: 900px) {
-  html, body { overflow: auto; }
-  .page-body  { height: auto; }
-  .chart-card { min-height: 300px; }
-  .metrics-grid { grid-template-columns: repeat(2, 1fr); }
-}
+  html, body { overflow: auto; height: auto; }
+  .page-body  { height: auto; padding: 1rem 1.25rem; }
 
-@media (max-width: 600px) {
-  .controls-grid { flex-direction: column; }
-  .metrics-grid  { grid-template-columns: 1fr; }
-  .navbar        { padding: 0 1rem; }
-  .page-body     { padding: 1rem; }
-}
+  .chart-card { min-height: 360px; flex: none; }
+  .chart-body { height: 280px; }
 
-/* ── RESPONSIVE ── */
-@media (max-width: 900px) {
-  html, body { overflow: auto; }
-  .page-body  { height: auto; }
   .metrics-grid { grid-template-columns: repeat(2, 1fr); }
   .chart-legend { flex-wrap: wrap; gap: 10px; }
-
-  
-  .chart-card { min-height: 360px; }
-  .chart-body { height: 280px; }
 }
 
+/* ════════════════════════════════
+   RESPONSIVE — MOBILE (≤ 600px)
+   ════════════════════════════════ */
 @media (max-width: 600px) {
-  .navbar       { padding: 0 1rem; }
-  .navbar-title { display: none; }            
-  .page-body    { padding: 0.75rem; gap: 0.75rem; }
-  .controls-grid { flex-direction: column; }
-  .horizon-group { width: 100%; }
-  .primary-btn   { width: 100%; text-align: center; justify-content: center; }
-  .metrics-grid  { grid-template-columns: repeat(2, 1fr); }
-  .chart-card    { min-height: 320px; }
-  .chart-body    { height: 240px; }
-  .chart-header  { flex-direction: column; align-items: flex-start; }
-  .metric-value  { font-size: 18px; }
+
+  /* ── Navbar: shrink everything so Download fits ── */
+  .navbar {
+    padding: 0 0.75rem;
+    height: 56px;
+    gap: 6px;
+  }
+  .navbar-brand { gap: 6px; }
+  .navbar-divider { display: none; }
+  .navbar-title { display: none; }           /* hide title, logo says enough */
+  .navbar-logo-wrap img { height: 28px; }
+
+  .btn-icon {
+    width: 34px; height: 34px; font-size: 14px;
+  }
+  .btn-download {
+    padding: 7px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+    gap: 5px;
+  }
+
+  /* ── Page body ── */
+  .page-body {
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  /* ── Controls ── */
+  .controls-grid   { flex-direction: column; gap: 0.9rem; }
+  .control-group   { width: 100%; }
+  .input-box       { width: 100%; min-width: unset; }
+  .horizon-group   { width: 100%; min-width: unset; }
+  .primary-btn     {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    padding: 12px;
+    font-size: 15px;
+  }
+
+  /* ── Chart ── */
+  .chart-card   { min-height: 320px; padding: 1rem; }
+  .chart-body   { height: 240px; }
+  .chart-header { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+  /* ── Metrics: 2-column grid, NO text wrapping ── */
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .metric-card {
+    padding: 0.85rem 0.9rem;
+    gap: 4px;
+  }
+  .metric-header {
+    font-size: 11px;
+    gap: 5px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .metric-icon-blue,
+  .metric-icon-red,
+  .metric-icon-green,
+  .metric-icon-gray { font-size: 13px; }
+
+  .metric-value       { font-size: 17px; letter-spacing: -0.3px; white-space: nowrap; }
+  .metric-value.dark  { font-size: 13px; }
 }
