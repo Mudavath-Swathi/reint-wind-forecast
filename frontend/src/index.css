@@ -305,5 +305,5 @@ html, body {
   .metric-icon-gray { font-size: 13px; }
 
   .metric-value       { font-size: 17px; letter-spacing: -0.3px; white-space: nowrap; }
-  .metric-value.dark  { font-size: 13px; }
+  .metric-value.dark  { font-size: 12px; white-space: normal; line-height: 1.4; word-break: break-word; }
 }
