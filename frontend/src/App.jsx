@@ -82,8 +82,8 @@ export default function App() {
       const end   = new Date(endTime).toISOString()
 
       const [actualRes, forecastRes] = await Promise.all([
-        axios.get(`${API_BASE}/actual`,   { params: { startTime: start, endTime: end } }),
-        axios.get(`${API_BASE}/forecast`, { params: { startTime: start, endTime: end, horizon } })
+        axios.get(`${API_BASE}/actual`,   { params: { startTime: start, endTime: end }, timeout: 60000 }),
+        axios.get(`${API_BASE}/forecast`, { params: { startTime: start, endTime: end, horizon }, timeout: 60000 })
       ])
 
       const actualMap = {}
@@ -107,7 +107,7 @@ export default function App() {
       computeMetrics(merged)
     } catch (err) {
       console.error(err)
-      setError('Failed to fetch data. Make sure the backend is running on port 5000.')
+      setError('Failed to fetch data. Please try again in a moment — the server may be waking up.')
     } finally {
       setLoading(false)
     }
