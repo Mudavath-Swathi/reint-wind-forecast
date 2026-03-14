@@ -6,7 +6,7 @@ A full-stack web application to monitor UK wind power generation forecasts vs ac
 🔗 [Deployed App](https://reint-wind-forecast-liard.vercel.app/)
 
 ## Demo Video
-🎬 [YouTube Demo]((https://youtu.be/_SyUV9psodg))
+🎬 [YouTube Demo][((https://youtu.be/_SyUV9psodg))](https://youtu.be/_SyUV9psodg)
 
 ## GitHub
 💻 [Repository](https://github.com/Mudavath-Swathi/reint-wind-forecast)
